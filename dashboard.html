@@ -177,17 +177,16 @@
 
         <aside class="sidebar" id="app-sidebar">
             <div style="padding: 10px 20px; color: var(--text-muted); font-size: 12px; letter-spacing: 1px;">MENU</div>
-            <button class="nav-btn" data-target="perfil" onclick="app.navigate('perfil')">⚙️ Meu Perfil</button>
             
+            <button class="nav-btn" data-target="perfil" onclick="app.navigate('perfil')">⚙️ Meu Perfil</button>
             <button class="nav-btn embarcador-only hidden" data-target="minhas-cargas" onclick="app.navigate('minhas-cargas')">📦 Gestão de Cargas</button>
             <button class="nav-btn embarcador-only hidden" data-target="postar-carga" onclick="app.navigate('postar-carga')" style="color:var(--bf-orange)">+ Nova Carga</button>
             
-            <button class="nav-btn motorista-only hidden" data-target="gestao-cargas" onclick="app.navigate('gestao-cargas')">🔍 Procurar Fretes</button>
-            <button class="nav-btn motorista-only hidden" data-target="minhas-viagens" onclick="app.navigate('minhas-viagens')">🛣️ Minhas Viagens</button>
-            <button class="nav-btn motorista-only hidden" data-target="historico-viagens" onclick="app.navigate('historico-viagens')">✅ Histórico</button>
-            
             <div style="flex: 1;"></div>
-            <button class="btn btn-danger" onclick="app.logout()">Sair do Sistema</button>
+            
+            <button class="btn btn-danger" onclick="app.logout()" style="margin: 20px; width: calc(100% - 40px);">
+                SAIR DO SISTEMA
+            </button>
         </aside>
 
         <main class="content-area">

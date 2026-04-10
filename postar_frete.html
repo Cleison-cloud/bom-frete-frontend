@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Anunciar Carga - Bom Frete</title>
+    <style>
+        body { font-family: 'Segoe UI', sans-serif; background: #f4f7f6; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
+        .card { background: white; padding: 30px; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.1); width: 400px; }
+        h2 { text-align: center; color: #333; margin-bottom: 20px; }
+        input { width: 100%; padding: 12px; margin: 10px 0; border: 1px solid #ddd; border-radius: 6px; box-sizing: border-box; }
+        button { width: 100%; padding: 14px; background: #FF6D00; color: white; border: none; font-weight: bold; border-radius: 6px; cursor: pointer; margin-top: 10px; }
+        .voltar { display: block; text-align: center; margin-top: 15px; color: #666; text-decoration: none; font-size: 14px; }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h2>📦 Anunciar Carga</h2>
+        <input type="text" id="origem" placeholder="Cidade de Origem">
+        <input type="text" id="destino" placeholder="Cidade de Destino">
+        <input type="text" id="produto" placeholder="O que vai transportar? (ex: Milho)">
+        <input type="number" id="peso" placeholder="Peso aproximado (Toneladas)">
+        <input type="number" id="valor" placeholder="Valor do pagamento (R$)">
+        
+        <button id="btnPublicar" onclick="enviarFrete()">PUBLICAR NO SISTEMA</button>
+        
+        <a href="dashboard.html" class="voltar">← Voltar ao Painel</a>
+    </div>
+
+    <script>
+        async function enviarFrete() {
+            const btn = document.getElementById('btnPublicar');
+            
+            // PEGA O CRACHÁ SALVO NO LOGIN
+            const token = localStorage.getItem('token');
+            
+            // Trava de segurança no Frontend
+            if (!token || token === 'null' || token === '') {
+                alert("❌ Acesso Negado! Você precisa fazer login primeiro.");
+                window.location.href = "login.html"; // Redireciona para o login
+                return;
+            }
+            
+            const dados = {
+                origem: document.getElementById('origem').value,
+                destino: document.getElementById('destino').value,
+                produto: document.getElementById('produto').value,
+                peso: parseFloat(document.getElementById('peso').value),
+                valor: parseFloat(document.getElementById('valor').value)
+            };
+
+            if(!dados.origem || !dados.destino || !dados.valor) {
+                alert("Por favor, preencha os campos principais.");
+                return;
+            }
+
+            try {
+                btn.innerText = "Publicando...";
+                btn.disabled = true;
+
+                const response = await fetch('https://bom-frete-api-cleison.onrender.com/fretes/criar', {
+                    method: 'POST',
+                    headers: { 
+                        'Content-Type': 'application/json',
+                        'Authorization': 'Bearer ' + token // Envia o crachá para o Python
+                    },
+                    body: JSON.stringify(dados)
+                });
+
+                if (response.ok) {
+                    alert("✅ Carga publicada com sucesso!");
+                    window.location.href = "dashboard.html";
+                } else {
+                    const resultado = await response.json();
+                    alert("Erro ao publicar: " + (resultado.error || "Acesso negado."));
+                }
+            } catch (err) {
+                alert("Erro de conexão com o servidor.");
+            } finally {
+                btn.innerText = "PUBLICAR NO SISTEMA";
+                btn.disabled = false;
+            }
+        }
+    </script>
+</body>
+</html>

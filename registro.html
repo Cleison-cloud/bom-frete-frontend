@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro - Bom Frete</title>
+    <style>
+        :root {
+            --bf-orange: #FF6D00;
+            --bf-blue: #003D7C;
+            --bf-bg: #f0f2f5;
+            --bf-white: #ffffff;
+        }
+
+        body { font-family: 'Segoe UI', sans-serif; background: var(--bf-bg); margin: 0; display: flex; justify-content: center; align-items: center; min-height: 100vh; padding: 20px; }
+
+        .register-container { width: 100%; max-width: 500px; background: var(--bf-white); padding: 30px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
+        .logo-login-img { text-align: center; margin-bottom: 20px; }
+        .logo-login-img h1 { color: var(--bf-blue); margin: 0; font-size: 28px; letter-spacing: -0.5px; }
+
+        .tabs { display: flex; gap: 10px; margin-bottom: 20px; }
+        .tab { flex: 1; padding: 12px; text-align: center; font-weight: bold; cursor: pointer; border-radius: 8px; border: 2px solid #ddd; color: #666; transition: 0.3s; }
+        .tab.active { border-color: var(--bf-orange); color: var(--bf-orange); background: rgba(255, 109, 0, 0.05); }
+
+        .form-group { margin-bottom: 15px; }
+        .form-group label { display: block; font-weight: bold; color: #555; margin-bottom: 5px; font-size: 14px; }
+        input, select { width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px; box-sizing: border-box; font-size: 15px; background: #f9f9f9; outline: none; transition: 0.2s; }
+        input:focus, select:focus { border-color: var(--bf-orange); background: var(--bf-white); }
+
+        /* Grade para colocar campos lado a lado */
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+
+        /* Sessão do Motorista escondida por padrão */
+        #sessao-motorista { display: none; background: #f4f7f6; padding: 15px; border-radius: 8px; border-left: 4px solid var(--bf-blue); margin-bottom: 15px; }
+        #sessao-motorista h3 { margin-top: 0; color: var(--bf-blue); font-size: 16px; margin-bottom: 15px; }
+
+        button.btn-registrar { width: 100%; padding: 15px; background: var(--bf-orange); color: var(--bf-white); border: none; font-weight: bold; font-size: 16px; border-radius: 8px; cursor: pointer; transition: 0.2s; margin-top: 10px; }
+        button.btn-registrar:hover { background: #e66000; }
+        button.btn-registrar:disabled { background: #ccc; cursor: not-allowed; }
+
+        .footer-links { text-align: center; margin-top: 20px; }
+        .footer-links a { color: var(--bf-blue); text-decoration: none; font-weight: bold; }
+        .footer-links a:hover { text-decoration: underline; color: var(--bf-orange); }
+        #msg-global { text-align: center; margin-top: 15px; font-weight: bold; min-height: 20px; }
+    </style>
+</head>
+<body>
+
+    <div class="register-container">
+        <div class="logo-login-img">
+            <h1>Bom Frete</h1>
+            <p style="color: #666; margin-top: 5px;">Crie sua conta agora</p>
+        </div>
+
+        <div class="tabs">
+            <div class="tab active" id="tab-motorista" onclick="selecionarPerfil('motorista')">🚚 Motorista</div>
+            <div class="tab" id="tab-embarcador" onclick="selecionarPerfil('embarcador')">🏢 Embarcador</div>
+        </div>
+
+        <div class="form-group">
+            <label>Nome Completo / Empresa</label>
+            <input type="text" id="reg-nome" placeholder="Digite seu nome">
+        </div>
+        <div class="form-group">
+            <label>E-mail</label>
+            <input type="email" id="reg-email" placeholder="seu@email.com">
+        </div>
+        <div class="grid-2">
+            <div class="form-group">
+                <label>Senha</label>
+                <input type="password" id="reg-senha" placeholder="Crie uma senha">
+            </div>
+            <div class="form-group">
+                <label>Telefone / WhatsApp</label>
+                <input type="text" id="reg-telefone" placeholder="(00) 00000-0000">
+            </div>
+        </div>
+
+        <div id="sessao-motorista">
+            <h3>Dados do Veículo</h3>
+            <div class="grid-2">
+                <div class="form-group">
+                    <label>Placa</label>
+                    <input type="text" id="reg-placa" placeholder="ABC-1234">
+                </div>
+                <div class="form-group">
+                    <label>Ano</label>
+                    <input type="text" id="reg-ano" placeholder="Ex: 2018">
+                </div>
+            </div>
+            <div class="grid-2">
+                <div class="form-group">
+                    <label>Fabricante</label>
+                    <input type="text" id="reg-fabricante" placeholder="Ex: Scania, Volvo">
+                </div>
+                <div class="form-group">
+                    <label>Modelo</label>
+                    <input type="text" id="reg-modelo" placeholder="Ex: FH 540">
+                </div>
+            </div>
+            <div class="grid-2">
+                <div class="form-group">
+                    <label>Carroceria</label>
+                    <select id="reg-carroceria">
+                        <option value="">Selecione...</option>
+                        <option value="Bau">Baú</option>
+                        <option value="Sider">Sider</option>
+                        <option value="Grade Baixa">Grade Baixa</option>
+                        <option value="Graneleiro">Graneleiro</option>
+                        <option value="Refrigerado">Refrigerado</option>
+                        <option value="Prancha">Prancha</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Capacidade (Ton)</label>
+                    <input type="text" id="reg-capacidade" placeholder="Ex: 15">
+                </div>
+            </div>
+        </div>
+
+        <p id="msg-global"></p>
+        <button class="btn-registrar" id="btn-registrar" onclick="fazerCadastro()">CADASTRAR</button>
+
+        <div class="footer-links">
+            <a href="index.html">Já tem uma conta? Faça Login</a>
+        </div>
+    </div>
+
+    <script>
+        const API_URL = 'https://bom-frete-api-cleison.onrender.com';
+        let perfilSelecionado = 'motorista'; // Começa com motorista por padrão
+
+        // Ao abrir a tela, já garante que os campos do caminhão aparecem
+        window.onload = () => {
+            selecionarPerfil('motorista');
+        }
+
+        function selecionarPerfil(perfil) {
+            perfilSelecionado = perfil;
+            const tabMot = document.getElementById('tab-motorista');
+            const tabEmb = document.getElementById('tab-embarcador');
+            const sessaoMot = document.getElementById('sessao-motorista');
+
+            if (perfil === 'motorista') {
+                tabMot.classList.add('active');
+                tabEmb.classList.remove('active');
+                sessaoMot.style.display = 'block'; // Mostra dados do caminhão
+            } else {
+                tabEmb.classList.add('active');
+                tabMot.classList.remove('active');
+                sessaoMot.style.display = 'none'; // Esconde dados do caminhão
+            }
+        }
+
+        async function fazerCadastro() {
+            const btn = document.getElementById('btn-registrar');
+            const msg = document.getElementById('msg-global');
+            
+            // Pega dados básicos
+            const payload = {
+                nome: document.getElementById('reg-nome').value,
+                email: document.getElementById('reg-email').value,
+                senha: document.getElementById('reg-senha').value,
+                telefone: document.getElementById('reg-telefone').value,
+                role: perfilSelecionado
+            };
+
+            // Validação simples
+            if (!payload.nome || !payload.email || !payload.senha) {
+                msg.style.color = 'red';
+                msg.innerText = "Nome, E-mail e Senha são obrigatórios!";
+                return;
+            }
+
+            // Se for motorista, anexa os dados do caminhão
+            if (perfilSelecionado === 'motorista') {
+                payload.placa_veiculo = document.getElementById('reg-placa').value; // Atualizado para corresponder ao DB
+                payload.ano = document.getElementById('reg-ano').value;
+                payload.fabricante = document.getElementById('reg-fabricante').value;
+                payload.modelo = document.getElementById('reg-modelo').value;
+                payload.tipo_veiculo = document.getElementById('reg-carroceria').value; // Atualizado para corresponder ao DB
+                payload.capacidade = document.getElementById('reg-capacidade').value;
+            }
+
+            btn.disabled = true;
+            btn.innerText = "Processando...";
+            msg.innerText = "";
+
+            try {
+                // CORREÇÃO AQUI: Alterado de /auth/register para /api/auth/register
+                const response = await fetch(`${API_URL}/api/auth/register`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+
+                const resultado = await response.json();
+
+                if (response.ok) {
+                    msg.style.color = 'green';
+                    msg.innerText = "✅ Cadastro realizado com sucesso! Redirecionando...";
+                    setTimeout(() => {
+                        window.location.href = "login.html"; // CORREÇÃO AQUI: Redireciona para login.html após cadastrar
+                    }, 2000);
+                } else {
+                    msg.style.color = 'red';
+                    msg.innerText = "❌ " + (resultado.msg || "Erro ao cadastrar."); // Ajustado de resultado.error para resultado.msg
+                }
+            } catch (err) {
+                msg.style.color = 'red';
+                msg.innerText = "❌ Sem conexão com o servidor.";
+                console.error("Erro na requisição:", err);
+            } finally {
+                btn.disabled = false;
+                btn.innerText = "CADASTRAR";
+            }
+        }
+    </script>
+    <script src="js/registro.js"></script>
+    <script src="js/login.js"></script>
+</body>
+</html>

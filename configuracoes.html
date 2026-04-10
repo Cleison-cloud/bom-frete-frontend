@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Configurações - Bom Frete</title>
+    <style>
+        :root {
+            --bf-orange: #FF6D00;
+            --bf-blue: #003D7C;
+            --bf-bg: #f4f7f6;
+        }
+
+        body { font-family: 'Segoe UI', sans-serif; background: var(--bf-bg); margin: 0; }
+        
+        .navbar { background: #ffffff; padding: 10px 20px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-bottom: 3px solid var(--bf-orange); }
+        .nav-titulo { font-size: 24px; font-weight: 800; color: var(--bf-blue); margin: 0; }
+        
+        .btn-voltar { background: transparent; color: var(--bf-blue); border: 1px solid var(--bf-blue); padding: 8px 15px; border-radius: 6px; cursor: pointer; font-weight: bold; text-decoration: none; }
+
+        .container { max-width: 600px; margin: 40px auto; padding: 0 20px; }
+        .card { background: white; padding: 30px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
+        
+        h2 { color: var(--bf-blue); border-bottom: 2px solid #eee; padding-bottom: 10px; margin-top: 0; }
+        
+        .option-group { margin-bottom: 25px; }
+        .option-group h3 { font-size: 16px; color: #555; margin-bottom: 15px; }
+
+        .btn-acao { width: 100%; padding: 12px; border-radius: 6px; border: none; font-weight: bold; cursor: pointer; transition: 0.2s; margin-bottom: 10px; }
+        .btn-primario { background: var(--bf-blue); color: white; }
+        .btn-primario:hover { background: #002a55; }
+        .btn-perigo { background: #ffebee; color: #d32f2f; border: 1px solid #d32f2f; }
+        .btn-perigo:hover { background: #d32f2f; color: white; }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <a href="dashboard.html" class="btn-voltar">← Voltar</a>
+        <h1 class="nav-titulo">Bom Frete</h1>
+        <div style="width: 80px;"></div> </nav>
+
+    <div class="container">
+        <div class="card">
+            <h2>Configurações</h2>
+            
+            <div class="option-group">
+                <h3>Segurança</h3>
+                <button class="btn-acao btn-primario" onclick="alert('Funcionalidade em desenvolvimento: Alterar Senha')">Alterar Minha Senha</button>
+            </div>
+
+            <div class="option-group">
+                <h3>Preferências</h3>
+                <button class="btn-acao btn-primario" onclick="alert('Notificações ativadas!')">Notificações de Novas Cargas</button>
+            </div>
+
+            <div class="option-group" style="margin-top: 50px;">
+                <h3 style="color: #d32f2f;">Zona de Perigo</h3>
+                <button class="btn-acao btn-perigo" onclick="excluirConta()">Excluir Minha Conta Permanentemente</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function excluirConta() {
+            if(confirm("TEM CERTEZA? Isso apagará todos os seus dados e não pode ser desfeito.")) {
+                alert("Sua solicitação foi enviada ao administrador.");
+            }
+        }
+    </script>
+</body>
+</html>

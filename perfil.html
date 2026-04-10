@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meu Perfil - Bom Frete</title>
+    <style>
+        :root {
+            --bf-orange: #FF6D00;
+            --bf-blue: #003D7C;
+            --bf-bg: #f4f7f6;
+        }
+
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: var(--bf-bg); margin: 0; padding: 0; }
+        
+        .navbar { background: #ffffff; padding: 10px 20px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-bottom: 3px solid var(--bf-orange); }
+        .nav-left, .nav-center, .nav-right { display: flex; align-items: center; flex: 1; }
+        .nav-center { justify-content: center; }
+        .nav-right { justify-content: flex-end; gap: 15px; }
+        .nav-titulo { font-size: 24px; font-weight: 800; color: var(--bf-blue); margin: 0; letter-spacing: -0.5px; }
+        
+        .btn-voltar { background: transparent; color: var(--bf-blue); border: 1px solid var(--bf-blue); padding: 8px 15px; border-radius: 6px; cursor: pointer; font-weight: bold; transition: 0.2s; text-decoration: none; }
+        .btn-voltar:hover { background: #e3f2fd; }
+        .btn-sair { background: transparent; color: #d32f2f; border: 1px solid #d32f2f; padding: 8px 15px; border-radius: 6px; cursor: pointer; font-weight: bold; transition: 0.2s; }
+        .btn-sair:hover { background: #ffebee; }
+        .btn-salvar { background: var(--bf-orange); color: white; border: none; font-weight: bold; padding: 12px; border-radius: 6px; cursor: pointer; width: 100%; font-size: 16px; margin-top: 15px; transition: 0.2s; }
+        .btn-salvar:hover { background: #e66000; }
+
+        .container { max-width: 600px; margin: 40px auto; padding: 0 20px; }
+        .card-perfil { background: white; padding: 30px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
+        
+        .cabecalho-perfil { text-align: center; margin-bottom: 30px; }
+        
+        /* --- ESTILOS DA FOTO DE PERFIL --- */
+        .avatar-container { position: relative; display: inline-block; cursor: pointer; margin-bottom: 10px; }
+        .avatar { font-size: 60px; background: #e0e0e0; border-radius: 50%; width: 120px; height: 120px; display: flex; align-items: center; justify-content: center; border: 4px solid var(--bf-orange); overflow: hidden; object-fit: cover; transition: 0.3s; }
+        .avatar:hover { opacity: 0.8; }
+        .texto-alterar-foto { display: block; font-size: 12px; color: var(--bf-blue); font-weight: bold; margin-top: 5px; cursor: pointer; }
+        .texto-alterar-foto:hover { text-decoration: underline; }
+
+        .cabecalho-perfil h2 { margin: 0; color: var(--bf-blue); }
+        .tag-tipo { display: inline-block; background: var(--bf-blue); color: white; padding: 4px 10px; border-radius: 20px; font-size: 12px; font-weight: bold; margin-top: 5px; text-transform: uppercase; }
+
+        .form-group { margin-bottom: 15px; }
+        .form-group label { display: block; font-weight: bold; color: #555; margin-bottom: 5px; font-size: 14px; }
+        .form-group input { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 6px; box-sizing: border-box; font-size: 15px; background: #f9f9f9; }
+        .form-group input:disabled { background: #e9ecef; color: #666; cursor: not-allowed; }
+        
+        #msg-status { text-align: center; margin-top: 15px; font-weight: bold; min-height: 20px; }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="nav-left">
+            <a href="dashboard.html" class="btn-voltar">← Voltar</a>
+        </div>
+        <div class="nav-center">
+            <h1 class="nav-titulo">Bom Frete</h1>
+        </div>
+        <div class="nav-right">
+            <button onclick="sair()" class="btn-sair">Sair</button>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="card-perfil">
+            <div class="cabecalho-perfil">
+                <div class="avatar-container" onclick="document.getElementById('input-foto').click()">
+                    <img id="img-avatar" src="" alt="Avatar" class="avatar" style="display: none;">
+                    <div id="div-avatar-placeholder" class="avatar">👤</div>
+                    <span class="texto-alterar-foto">📷 Alterar Foto</span>
+                </div>
+                
+                <input type="file" id="input-foto" style="display: none;" accept="image/*" onchange="enviarFoto(this)">
+
+                <h2 id="nome-exibicao">A carregar...</h2>
+                <span class="tag-tipo" id="tipo-conta">...</span>
+            </div>
+
+            <div id="form-perfil">
+                <div class="form-group">
+                    <label>Nome Completo</label>
+                    <input type="text" id="perfil-nome" disabled>
+                </div>
+                <div class="form-group">
+                    <label>E-mail (Login)</label>
+                    <input type="email" id="perfil-email" disabled>
+                </div>
+                <div class="form-group">
+                    <label>Telefone / WhatsApp</label>
+                    <input type="text" id="perfil-telefone" placeholder="(00) 00000-0000">
+                </div>
+                <div class="form-group" id="div-veiculo" style="display: none;">
+                    <label>Tipo de Veículo / Carroceria</label>
+                    <input type="text" id="perfil-veiculo" placeholder="Ex: Baú, Carreta, Truck">
+                </div>
+
+                <p id="msg-status"></p>
+                <button class="btn-salvar" onclick="salvarPerfil()">Atualizar Dados</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const API_URL = 'https://bom-frete-api.onrender.com';
+        const token = localStorage.getItem('token');
+
+        if (!token || token === 'null' || token === '') {
+            window.location.href = "index.html";
+        }
+
+        window.onload = carregarDadosPerfil;
+
+        async function carregarDadosPerfil() {
+            try {
+                const payloadBase64 = token.split('.')[1];
+                const decodedPayload = JSON.parse(atob(payloadBase64));
+                const userRole = decodedPayload.role;
+
+                document.getElementById('tipo-conta').innerText = userRole;
+                
+                if (userRole === 'motorista') {
+                    document.getElementById('div-veiculo').style.display = 'block';
+                }
+
+                const response = await fetch(`${API_URL}/auth/perfil`, {
+                    headers: { 'Authorization': 'Bearer ' + token }
+                });
+
+                if (response.ok) {
+                    const dados = await response.json();
+                    
+                    document.getElementById('nome-exibicao').innerText = dados.nome;
+                    document.getElementById('perfil-nome').value = dados.nome;
+                    document.getElementById('perfil-email').value = dados.email;
+                    
+                    if (dados.telefone) document.getElementById('perfil-telefone').value = dados.telefone;
+                    // Se estivermos a usar a 'carroceria' ou 'veiculo', ajustamos consoante o que foi salvo
+                    if (dados.carroceria) document.getElementById('perfil-veiculo').value = dados.carroceria;
+                    else if (dados.veiculo) document.getElementById('perfil-veiculo').value = dados.veiculo;
+
+                    // CARREGA A FOTO SE ELA EXISTIR!
+                    if (dados.foto_perfil) {
+                        const img = document.getElementById('img-avatar');
+                        img.src = `${API_URL}/auth/uploads/${dados.foto_perfil}`;
+                        img.style.display = 'block';
+                        document.getElementById('div-avatar-placeholder').style.display = 'none';
+                    }
+
+                } else {
+                    mostrarMensagem("Erro ao carregar os dados.", "red");
+                }
+            } catch (err) {
+                console.error("Erro:", err);
+            }
+        }
+
+        // --- NOVA FUNÇÃO PARA ENVIAR A FOTO ---
+        async function enviarFoto(input) {
+            if (input.files && input.files[0]) {
+                const fotoFile = input.files[0];
+                const msg = document.getElementById('msg-status');
+                
+                // Prepara o formulário invisível para enviar o ficheiro
+                const formData = new FormData();
+                formData.append('foto', fotoFile);
+
+                mostrarMensagem("A enviar imagem...", "#333");
+
+                try {
+                    const response = await fetch(`${API_URL}/auth/perfil/foto`, {
+                        method: 'POST',
+                        headers: { 'Authorization': 'Bearer ' + token },
+                        body: formData // Nota: Não definimos Content-Type ao enviar FormData no fetch!
+                    });
+
+                    const resultado = await response.json();
+
+                    if (response.ok) {
+                        // Atualiza a imagem no ecrã na hora!
+                        const img = document.getElementById('img-avatar');
+                        img.src = API_URL + resultado.foto_url + "?t=" + new Date().getTime(); // Para evitar cache
+                        img.style.display = 'block';
+                        document.getElementById('div-avatar-placeholder').style.display = 'none';
+                        
+                        mostrarMensagem("📸 " + resultado.message, "green");
+                    } else {
+                        mostrarMensagem("❌ Erro ao enviar foto: " + resultado.error, "red");
+                    }
+                } catch (err) {
+                    mostrarMensagem("❌ Erro de ligação ao enviar a foto.", "red");
+                }
+            }
+        }
+
+        async function salvarPerfil() {
+            const btn = document.querySelector('.btn-salvar');
+            const msg = document.getElementById('msg-status');
+            
+            const dadosAtualizados = {
+                telefone: document.getElementById('perfil-telefone').value,
+                carroceria: document.getElementById('perfil-veiculo').value // Usando o campo de veículo da tela
+            };
+
+            btn.disabled = true;
+            btn.innerText = "A guardar...";
+
+            try {
+                const response = await fetch(`${API_URL}/auth/perfil`, {
+                    method: 'PUT',
+                    headers: { 
+                        'Content-Type': 'application/json',
+                        'Authorization': 'Bearer ' + token 
+                    },
+                    body: JSON.stringify(dadosAtualizados)
+                });
+
+                if (response.ok) {
+                    mostrarMensagem("✅ Dados atualizados com sucesso!", "green");
+                } else {
+                    mostrarMensagem("❌ Erro ao guardar os dados.", "red");
+                }
+            } catch (err) {
+                mostrarMensagem("❌ Erro de ligação ao servidor.", "red");
+            } finally {
+                btn.disabled = false;
+                btn.innerText = "Atualizar Dados";
+            }
+        }
+
+        function mostrarMensagem(texto, cor) {
+            const msg = document.getElementById('msg-status');
+            msg.style.color = cor;
+            msg.innerText = texto;
+            setTimeout(() => { if(msg.innerText === texto) msg.innerText = ""; }, 4000);
+        }
+
+        function sair() {
+            localStorage.removeItem('token');
+            window.location.href = "index.html";
+        }
+    </script>
+</body>
+</html>

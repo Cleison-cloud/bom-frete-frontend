@@ -1,5 +1,4 @@
 {
   "cleanUrls": true,
-  "buildCommand": "npm run build",
-  "outputDirectory": "dist"
+  "buildCommand": "echo 'Ignorando Vite para servir arquivos puros'"
 }

@@ -14,48 +14,75 @@
 
         body { margin: 0; font-family: 'Inter', sans-serif; background-color: var(--bg-dark); color: var(--text-main); display: flex; flex-direction: column; height: 100vh; overflow: hidden; }
 
-        /* TOPBAR */
         .topbar { height: 70px; background: rgba(26, 26, 26, 0.85); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border-color); display: flex; justify-content: space-between; align-items: center; padding: 0 30px; z-index: 200; }
-        .topbar-left { display: flex; align-items: center; width: 30%; }
-        .topbar-center { display: flex; justify-content: center; align-items: center; flex: 1; }
-        .topbar-right { display: flex; justify-content: flex-end; align-items: center; width: 30%; gap: 15px; }
+        .topbar-left { display: flex; gap: 10px; align-items: center; width: 33%; }
+        .topbar-center { display: flex; justify-content: center; align-items: center; width: 33%; }
+        .topbar-right { display: flex; justify-content: flex-end; align-items: center; width: 33%; gap: 10px; }
 
         .brand { display: flex; align-items: center; gap: 10px; font-size: 22px; font-weight: 800; letter-spacing: 1px; color: var(--text-main); }
         .brand span { color: var(--bf-orange); }
 
         .icon-btn { background: rgba(255,255,255,0.05); border: 1px solid var(--border-color); color: var(--text-muted); cursor: pointer; transition: all 0.3s ease; display: flex; align-items: center; justify-content: center; padding: 8px; border-radius: 8px; }
+        .icon-btn:hover { color: var(--text-main); background: rgba(255, 255, 255, 0.1); border-color: var(--text-muted); }
+
         .btn-hamburger { display: none; }
 
-        /* SIDEBAR */
+        .profile-trigger { display: flex; align-items: center; gap: 10px; cursor: pointer; padding: 5px 10px; border-radius: 30px; border: 1px solid transparent; transition: all 0.3s; }
+        .avatar { width: 40px; height: 40px; border-radius: 50%; background-color: var(--bf-blue); border: 2px solid var(--bf-orange); display: flex; align-items: center; justify-content: center; overflow: hidden; }
+        .avatar img { width: 100%; height: 100%; object-fit: cover; }
+        .user-info-header { display: flex; flex-direction: column; text-align: right; }
+
         .app-wrapper { display: flex; flex: 1; overflow: hidden; position: relative; }
         .sidebar { width: 260px; background-color: var(--surface-dark); border-right: 1px solid var(--border-color); display: flex; flex-direction: column; padding: 20px 0; gap: 5px; z-index: 150; }
-        .nav-btn { background: transparent; color: var(--text-muted); border: none; padding: 15px 30px; text-align: left; font-size: 14px; font-weight: 600; cursor: pointer; transition: 0.3s; border-left: 4px solid transparent; width: 100%; }
+
+        .nav-btn { background: transparent; color: var(--text-muted); border: none; padding: 15px 30px; text-align: left; font-size: 15px; font-weight: 600; cursor: pointer; transition: all 0.3s; border-left: 4px solid transparent; width: 100%; }
         .nav-btn:hover { background-color: var(--surface-lighter); color: var(--text-main); border-left-color: var(--bf-blue-light); }
         .nav-btn.active-nav { background: linear-gradient(90deg, rgba(0,61,124,0.3) 0%, transparent 100%); color: var(--bf-orange); border-left-color: var(--bf-orange); }
-
-        /* BOTÃO SAIR SIDEBAR (Fixado no fundo) */
-        .sidebar-footer { margin-top: auto; padding: 20px; border-top: 1px solid var(--border-color); }
-        .btn-logout-sidebar { width: 100%; padding: 12px; background: rgba(239, 68, 68, 0.1); color: #ef4444; border: 1px solid rgba(239, 68, 68, 0.2); border-radius: 8px; font-weight: bold; cursor: pointer; transition: 0.3s; display: flex; align-items: center; justify-content: center; gap: 10px; }
-        .btn-logout-sidebar:hover { background: #ef4444; color: white; }
-
-        /* CONTENT */
+        
         .content-area { flex: 1; padding: 40px; overflow-y: auto; background: radial-gradient(circle at top right, #111 0%, var(--bg-dark) 100%); }
-        .view-section { display: none; }
+        .view-section { display: none; animation: fadeIn 0.4s ease; }
         .view-section.active { display: block; }
         .hidden { display: none !important; }
-        .card { background-color: var(--surface-dark); border: 1px solid var(--border-color); border-radius: 12px; padding: 25px; margin-bottom: 20px; }
 
-        /* MOBILE */
-        .mobile-overlay { display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.6); z-index: 140; backdrop-filter: blur(2px); }
+        .section-title { font-size: 28px; margin-top: 0; margin-bottom: 25px; font-weight: 300; border-bottom: 1px solid var(--border-color); padding-bottom: 15px; }
+        .card { background-color: var(--surface-dark); border: 1px solid var(--border-color); border-radius: 12px; padding: 25px; margin-bottom: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+
+        .form-group { margin-bottom: 20px; }
+        .form-group label { display: block; margin-bottom: 8px; color: var(--text-muted); font-size: 14px; text-transform: uppercase; letter-spacing: 0.5px; }
+        .form-control { width: 100%; padding: 12px 15px; border: 1px solid var(--border-color); border-radius: 8px; background-color: var(--bg-dark); color: var(--text-main); font-size: 16px; box-sizing: border-box; transition: 0.3s; font-family: 'Inter', sans-serif; }
         
+        .btn { padding: 12px 24px; border: none; border-radius: 8px; cursor: pointer; font-weight: 600; font-size: 15px; transition: all 0.3s; display: inline-flex; align-items: center; justify-content: center; gap: 8px; }
+        .btn-primary { background-color: var(--bf-blue); color: white; }
+        .btn-success { background-color: #10b981; color: white; }
+        .btn-danger { background-color: transparent; color: #ef4444; border: 1px solid #ef4444; margin: 20px; text-align: center; width: calc(100% - 40px); }
+
+        /* Modais */
+        .modal-overlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0, 0, 0, 0.8); backdrop-filter: blur(5px); display: flex; justify-content: center; align-items: center; z-index: 999; }
+        .modal-overlay.hidden { display: none; }
+        .modal-content { background: var(--surface-dark); width: 90%; max-width: 450px; padding: 30px; border-radius: 12px; border: 1px solid var(--border-color); box-shadow: 0 0 30px rgba(0,0,0,0.8); position: relative; }
+        
+        /* Chat */
+        .chat-fab { position: fixed; bottom: 30px; right: 30px; width: 65px; height: 65px; background: #10b981; border-radius: 50%; display: flex; justify-content: center; align-items: center; z-index: 900; cursor: pointer; }
+        .chat-badge { position: absolute; top: 0; right: 0; background: #ef4444; color: white; font-size: 12px; font-weight: bold; width: 22px; height: 22px; border-radius: 50%; display: flex; justify-content: center; align-items: center; border: 3px solid var(--bg-dark); }
+        .chat-box { height: 300px; overflow-y: auto; background: var(--bg-dark); padding: 15px; border-radius: 8px; border: 1px solid var(--border-color); margin-bottom: 15px; display: flex; flex-direction: column; gap: 10px; }
+        
+        #toast-container { position: fixed; top: 20px; right: 20px; z-index: 9999; display: flex; flex-direction: column; gap: 10px; }
+
+        .mobile-overlay { display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.6); z-index: 140; backdrop-filter: blur(2px); transition: opacity 0.3s; opacity: 0; }
+        .mobile-overlay.active { display: block; opacity: 1; }
+
         @media (max-width: 768px) {
-            .btn-hamburger { display: flex !important; }
-            .topbar-right .desktop-logout { display: none !important; } /* Esconde o botão sair do topo no telemóvel */
-            .sidebar { position: fixed; left: -260px; top: 0; height: 100vh; transition: 0.3s; padding-top: 70px; }
-            .sidebar.active { transform: translateX(260px); }
-            .mobile-overlay.active { display: block; }
-            .content-area { padding: 20px; }
-            .topbar { padding: 0 15px; }
+            .btn-hamburger { display: flex !important; } 
+            .topbar { padding: 0 15px; } 
+            .topbar-center .brand { font-size: 18px; } 
+            .user-info-header { display: none; } 
+            
+            /* ESCONDE O BOTÃO SAIR DO TOPO NO CELULAR */
+            .header-logout-btn { display: none !important; }
+
+            .sidebar { position: fixed; left: -260px; top: 0; height: 100vh; transition: transform 0.3s ease; box-shadow: 5px 0 20px rgba(0,0,0,0.8); padding-top: 80px; }
+            .sidebar.active { transform: translateX(260px); } 
+            .content-area { padding: 20px; } 
         }
     </style>
 </head>
@@ -68,15 +95,16 @@
             </button>
         </div>
         <div class="topbar-center">
-            <div class="brand">BOM<span>FRETE</span></div>
+            <div class="brand"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--bf-orange)" stroke-width="2"><rect x="1" y="3" width="15" height="13"></rect><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon><circle cx="5.5" cy="18.5" r="2.5"></circle><circle cx="18.5" cy="18.5" r="2.5"></circle></svg> BOM<span>FRETE</span></div>
         </div>
         <div class="topbar-right">
-            <button class="icon-btn desktop-logout" onclick="app.logout()" style="border-color: #ef4444; color: #ef4444; gap: 5px; padding: 5px 12px;">
+            <button class="icon-btn header-logout-btn" onclick="app.logout()" style="border-color: #ef4444; color: #ef4444; gap: 5px; padding: 5px 12px;">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>
                 <span style="font-size: 11px; font-weight: bold;">SAIR</span>
             </button>
             <div class="profile-trigger" onclick="app.navigate('perfil')">
-                <div class="avatar"><img id="avatar-header" src="img/default.png" onerror="this.style.display='none'"></div>
+                <div class="user-info-header"><span id="user-name" style="font-weight: 600; font-size: 14px;">Carregando...</span><span id="user-role" style="font-size: 11px; color: var(--bf-orange); text-transform: uppercase;">-</span></div>
+                <div class="avatar"><img id="avatar-header" src="img/default.png" alt="Perfil" onerror="this.style.display='none'"><svg id="avatar-fallback" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg></div>
             </div>
         </div>
     </header>
@@ -85,60 +113,86 @@
         <div id="mobile-overlay" class="mobile-overlay" onclick="app.closeSidebar()"></div>
 
         <aside class="sidebar" id="app-sidebar">
-            <div style="padding: 10px 25px; color: var(--text-muted); font-size: 12px; letter-spacing: 1px;">NAVEGAÇÃO</div>
+            <div style="padding: 10px 20px; color: var(--text-muted); font-size: 12px; letter-spacing: 1px;">MENU</div>
             <button class="nav-btn" data-target="perfil" onclick="app.navigate('perfil')">⚙️ Meu Perfil</button>
             <button class="nav-btn embarcador-only hidden" data-target="minhas-cargas" onclick="app.navigate('minhas-cargas')">📦 Gestão de Cargas</button>
             <button class="nav-btn embarcador-only hidden" data-target="postar-carga" onclick="app.navigate('postar-carga')" style="color:var(--bf-orange)">+ Nova Carga</button>
             <button class="nav-btn motorista-only hidden" data-target="gestao-cargas" onclick="app.navigate('gestao-cargas')">🔍 Procurar Fretes</button>
             <button class="nav-btn motorista-only hidden" data-target="minhas-viagens" onclick="app.navigate('minhas-viagens')">🛣️ Minhas Viagens</button>
             <button class="nav-btn motorista-only hidden" data-target="historico-viagens" onclick="app.navigate('historico-viagens')">✅ Histórico</button>
-
-            <div class="sidebar-footer">
-                <button class="btn-logout-sidebar" onclick="app.logout()">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>
-                    SAIR DO SISTEMA
-                </button>
-            </div>
+            
+            <div style="flex: 1;"></div>
+            <button class="btn btn-danger" onclick="app.logout()">Sair do Sistema</button>
         </aside>
 
         <main class="content-area">
             <section id="view-perfil" class="view-section">
                 <h2 class="section-title">Meu Perfil</h2>
-                <div class="card" id="perfil-card">Carregando dados...</div>
-                <form id="form-perfil" class="hidden">
-                    <input type="text" id="perfil-nome">
-                    <input type="text" id="perfil-email">
-                    <input type="text" id="perfil-telefone">
-                </form>
+                <div class="card" style="max-width: 600px;">
+                    <div class="profile-photo-wrapper">
+                        <img id="perfil-foto-preview" class="profile-photo-preview" src="img/default.png">
+                        <div>
+                            <input type="file" id="input-foto" style="display:none" accept="image/*" onchange="app.uploadFoto(event)">
+                            <button type="button" class="btn btn-outline" onclick="document.getElementById('input-foto').click()">Alterar Foto</button>
+                        </div>
+                    </div>
+                    <form id="form-perfil">
+                        <div class="form-group"><label>Nome</label><input type="text" id="perfil-nome" class="form-control" readonly></div>
+                        <div class="form-group"><label>E-mail</label><input type="email" id="perfil-email" class="form-control" readonly></div>
+                        <div class="form-group"><label>WhatsApp</label><input type="text" id="perfil-telefone" class="form-control" readonly></div>
+                        <div class="form-group motorista-only hidden"><label>Placa do Veículo</label><input type="text" id="perfil-placa" class="form-control" readonly></div>
+                        <div style="display: flex; gap: 10px; margin-top: 20px;">
+                            <button type="button" class="btn btn-primary" id="btn-edit-perfil" onclick="app.toggleEditPerfil()">Editar Dados</button>
+                            <button type="button" class="btn btn-success hidden" id="btn-save-perfil" onclick="app.salvarPerfil(event)">Gravar</button>
+                        </div>
+                    </form>
+                </div>
             </section>
 
             <section id="view-minhas-cargas" class="view-section active">
-                <h2 class="section-title">📦 Gestão de Cargas</h2>
+                <h2 class="section-title">Monitoramento de Cargas (Embarcador)</h2>
                 <div id="lista-minhas-cargas"></div>
             </section>
 
             <section id="view-postar-carga" class="view-section">
                 <h2 class="section-title">Publicar Nova Carga</h2>
-                <div class="card">
+                <div class="card" style="max-width: 600px;">
                     <form id="form-nova-carga" onsubmit="app.postarCarga(event)">
-                        <input type="text" id="carga-origem" class="hidden"><input type="text" id="carga-destino" class="hidden">
-                        <input type="number" id="carga-valor" class="hidden"><textarea id="carga-descricao" class="hidden"></textarea>
-                        <p>Formulário de carga ativo.</p>
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                            <div class="form-group"><label>Local de Origem *</label><input type="text" id="carga-origem" class="form-control" required></div>
+                            <div class="form-group"><label>Local de Destino *</label><input type="text" id="carga-destino" class="form-control" required></div>
+                        </div>
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                            <div class="form-group"><label>Valor (R$) *</label><input type="number" step="0.01" id="carga-valor" class="form-control" required></div>
+                            <div class="form-group"><label>Nome do Responsável</label><input type="text" id="carga-responsavel" class="form-control"></div>
+                        </div>
+                        <div class="form-group"><label>Detalhes da Carga</label><textarea id="carga-descricao" class="form-control"></textarea></div>
+                        <button type="submit" id="btn-postar" class="btn btn-primary" style="width: 100%;">Transmitir Frete</button>
                     </form>
                 </div>
             </section>
 
-            <section id="view-gestao-cargas" class="view-section"><div id="lista-cargas-disponiveis"></div></section>
-            <section id="view-minhas-viagens" class="view-section"><div id="lista-minhas-viagens"></div></section>
-            <section id="view-historico-viagens" class="view-section"><div id="lista-historico-viagens"></div></section>
+            <section id="view-gestao-cargas" class="view-section"><h2 class="section-title">Painel de Fretes</h2><div id="lista-cargas-disponiveis"></div></section>
+            <section id="view-minhas-viagens" class="view-section"><h2 class="section-title">Minhas Viagens</h2><div id="lista-minhas-viagens"></div></section>
+            <section id="view-historico-viagens" class="view-section"><h2 class="section-title">Histórico</h2><div id="lista-historico-viagens"></div></section>
         </main>
     </div>
 
-    <div class="chat-fab" onclick="app.abrirListaChats()"><span id="chat-badge" class="hidden">!</span></div>
-    <div id="modal-rastreio" class="hidden"><div id="rastreio-info"></div></div>
-    <div id="modal-chat" class="hidden"><div id="chat-box"></div><input type="text" id="chat-input"></div>
-    <div id="toast-container"></div>
+    <div class="chat-fab" onclick="app.abrirListaChats()"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v10z"></path></svg><span id="chat-badge" class="chat-badge hidden">!</span></div>
+    
+    <div id="modal-rastreio" class="modal-overlay hidden"><div class="modal-content"><h3 style="color:white">Radar BOM FRETE</h3><div id="rastreio-info"></div><button class="btn btn-primary" onclick="app.fecharRastreio()">Fechar</button></div></div>
+    
+    <div id="modal-chat" class="modal-overlay hidden"><div class="modal-content" style="border-color: #10b981;">
+        <div id="chat-view-list"><div id="lista-de-contatos-chat"></div></div>
+        <div id="chat-view-messages" class="hidden">
+            <h3 id="chat-titulo" style="color:#10b981"></h3>
+            <div class="chat-box" id="chat-box"></div>
+            <form onsubmit="app.enviarMensagem(event)"><input type="text" id="chat-input" class="form-control" placeholder="Mensagem..."></form>
+        </div>
+        <button class="btn btn-outline" onclick="app.fecharChat()">Fechar</button>
+    </div></div>
 
+    <div id="toast-container"></div>
     <script src="js/dashboard.js"></script>
 </body>
 </html>

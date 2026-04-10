@@ -28,7 +28,6 @@
         .profile-trigger { display: flex; align-items: center; gap: 10px; cursor: pointer; padding: 5px 10px; border-radius: 30px; border: 1px solid transparent; transition: all 0.3s; }
         .avatar { width: 40px; height: 40px; border-radius: 50%; background-color: var(--bf-blue); border: 2px solid var(--bf-orange); display: flex; align-items: center; justify-content: center; overflow: hidden; }
         .avatar img { width: 100%; height: 100%; object-fit: cover; }
-        .user-info-header { display: flex; flex-direction: column; text-align: right; }
 
         .app-wrapper { display: flex; flex: 1; overflow: hidden; position: relative; }
         .sidebar { width: 260px; background-color: var(--surface-dark); border-right: 1px solid var(--border-color); display: flex; flex-direction: column; padding: 20px 0; gap: 5px; z-index: 150; }
@@ -45,7 +44,8 @@
         .section-title { font-size: 28px; margin-top: 0; margin-bottom: 25px; font-weight: 300; border-bottom: 1px solid var(--border-color); padding-bottom: 15px; }
         .card { background-color: var(--surface-dark); border: 1px solid var(--border-color); border-radius: 12px; padding: 25px; margin-bottom: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
 
-        .form-control { width: 100%; padding: 12px 15px; border: 1px solid var(--border-color); border-radius: 8px; background-color: var(--bg-dark); color: var(--text-main); font-size: 16px; box-sizing: border-box; transition: 0.3s; font-family: 'Inter', sans-serif; }
+        .form-control { width: 100%; padding: 12px 15px; border: 1px solid var(--border-color); border-radius: 8px; background-color: var(--bg-dark); color: var(--text-main); font-size: 16px; box-sizing: border-box; transition: 0.3s; font-family: 'Inter', sans-serif; margin-bottom: 15px; }
+        
         .btn { padding: 12px 24px; border: none; border-radius: 8px; cursor: pointer; font-weight: 600; font-size: 15px; transition: all 0.3s; display: inline-flex; align-items: center; justify-content: center; gap: 8px; }
         .btn-primary { background-color: var(--bf-blue); color: white; }
         .btn-success { background-color: #10b981; color: white; }
@@ -53,10 +53,10 @@
 
         .modal-overlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0, 0, 0, 0.8); backdrop-filter: blur(5px); display: flex; justify-content: center; align-items: center; z-index: 999; }
         .modal-overlay.hidden { display: none; }
-        .modal-content { background: var(--surface-dark); width: 90%; max-width: 450px; padding: 30px; border-radius: 12px; border: 1px solid var(--border-color); box-shadow: 0 0 30px rgba(0,0,0,0.8); position: relative; }
+        .modal-content { background: var(--surface-dark); width: 90%; max-width: 450px; padding: 30px; border-radius: 12px; border: 1px solid var(--border-color); position: relative; }
         
         .chat-fab { position: fixed; bottom: 30px; right: 30px; width: 65px; height: 65px; background: #10b981; border-radius: 50%; display: flex; justify-content: center; align-items: center; z-index: 900; cursor: pointer; }
-        .chat-badge { position: absolute; top: 0; right: 0; background: #ef4444; color: white; font-size: 12px; font-weight: bold; width: 22px; height: 22px; border-radius: 50%; display: flex; justify-content: center; align-items: center; border: 3px solid var(--bg-dark); }
+        .chat-badge { position: absolute; top: 0; right: 0; background: #ef4444; color: white; font-size: 12px; width: 22px; height: 22px; border-radius: 50%; display: flex; justify-content: center; align-items: center; border: 3px solid var(--bg-dark); }
         .chat-box { height: 300px; overflow-y: auto; background: var(--bg-dark); padding: 15px; border-radius: 8px; border: 1px solid var(--border-color); margin-bottom: 15px; display: flex; flex-direction: column; gap: 10px; }
         
         #toast-container { position: fixed; top: 20px; right: 20px; z-index: 9999; display: flex; flex-direction: column; gap: 10px; }
@@ -68,7 +68,6 @@
             .btn-hamburger { display: flex !important; } 
             .topbar { padding: 0 15px; } 
             .topbar-center .brand { font-size: 18px; } 
-            .user-info-header { display: none; } 
             .header-logout-btn { display: none !important; }
             .sidebar { position: fixed; left: -260px; top: 0; height: 100vh; transition: transform 0.3s ease; box-shadow: 5px 0 20px rgba(0,0,0,0.8); padding-top: 80px; }
             .sidebar.active { transform: translateX(260px); } 
@@ -85,7 +84,7 @@
             </button>
         </div>
         <div class="topbar-center">
-            <div class="brand"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--bf-orange)" stroke-width="2"><rect x="1" y="3" width="15" height="13"></rect><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon><circle cx="5.5" cy="18.5" r="2.5"></circle><circle cx="18.5" cy="18.5" r="2.5"></circle></svg> BOM<span>FRETE</span></div>
+            <div class="brand">BOM<span>FRETE</span></div>
         </div>
         <div class="topbar-right">
             <button class="icon-btn header-logout-btn" onclick="app.logout()" style="border-color: #ef4444; color: #ef4444; gap: 5px; padding: 5px 12px;">
@@ -93,8 +92,7 @@
                 <span style="font-size: 11px; font-weight: bold;">SAIR</span>
             </button>
             <div class="profile-trigger" onclick="app.navigate('perfil')">
-                <div class="user-info-header"><span id="user-name" style="font-weight: 600; font-size: 14px;">Carregando...</span><span id="user-role" style="font-size: 11px; color: var(--bf-orange); text-transform: uppercase;">-</span></div>
-                <div class="avatar"><img id="avatar-header" src="img/default.png" onerror="this.style.display='none'"><svg id="avatar-fallback" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg></div>
+                <div class="avatar"><img id="avatar-header" src="img/default.png" onerror="this.style.display='none'"></div>
             </div>
         </div>
     </header>
@@ -103,15 +101,13 @@
         <div id="mobile-overlay" class="mobile-overlay" onclick="app.closeSidebar()"></div>
 
         <aside class="sidebar" id="app-sidebar">
-            <div style="padding: 10px 20px; color: var(--text-muted); font-size: 12px; letter-spacing: 1px;">MENU</div>
+            <div style="padding: 10px 20px; color: var(--text-muted); font-size: 12px;">MENU</div>
             <button class="nav-btn" data-target="perfil" onclick="app.navigate('perfil')">⚙️ Meu Perfil</button>
             <button class="nav-btn embarcador-only hidden" data-target="minhas-cargas" onclick="app.navigate('minhas-cargas')">📦 Gestão de Cargas</button>
             <button class="nav-btn embarcador-only hidden" data-target="postar-carga" onclick="app.navigate('postar-carga')" style="color:var(--bf-orange)">+ Nova Carga</button>
-            
             <button class="nav-btn motorista-only hidden" data-target="gestao-cargas" onclick="app.navigate('gestao-cargas')">🔍 Procurar Fretes</button>
-            <button class="nav-btn motorista-only hidden" data-target="minhas-viagens" onclick="app.navigate('minhas-viagens')">🛣️ Minhas Viagens</button>
-            <button class="nav-btn motorista-only hidden" data-target="historico-viagens" onclick="app.navigate('historico-viagens')">✅ Histórico</button>
-
+            
+            <div style="flex: 1;"></div>
             <button class="nav-btn" onclick="app.logout()" style="color: #ef4444; border-top: 1px solid #333; margin-top: 10px;">
                 ❌ Sair do Sistema
             </button>
@@ -120,15 +116,12 @@
         <main class="content-area">
             <section id="view-perfil" class="view-section">
                 <h2 class="section-title">Meu Perfil</h2>
-                <div class="card" style="max-width: 600px;">
-                    <form id="form-perfil">
-                        <div class="form-group"><label>Nome</label><input type="text" id="perfil-nome" class="form-control" readonly></div>
-                        <div class="form-group"><label>E-mail</label><input type="email" id="perfil-email" class="form-control" readonly></div>
-                        <div class="form-group"><label>WhatsApp</label><input type="text" id="perfil-telefone" class="form-control" readonly></div>
-                        <div class="form-group motorista-only hidden"><label>Placa</label><input type="text" id="perfil-placa" class="form-control" readonly></div>
-                        <button type="button" class="btn btn-primary" id="btn-edit-perfil" onclick="app.toggleEditPerfil()">Editar Dados</button>
-                    </form>
-                </div>
+                <div class="card" id="perfil-card">Carregando...</div>
+                <form id="form-perfil" class="hidden">
+                    <input type="text" id="perfil-nome" class="form-control" readonly>
+                    <input type="email" id="perfil-email" class="form-control" readonly>
+                    <input type="text" id="perfil-telefone" class="form-control" readonly>
+                </form>
             </section>
 
             <section id="view-minhas-cargas" class="view-section active">
@@ -142,8 +135,8 @@
                     <form id="form-nova-carga" onsubmit="app.postarCarga(event)">
                         <input type="text" id="carga-origem" class="form-control" placeholder="Origem" required>
                         <input type="text" id="carga-destino" class="form-control" placeholder="Destino" required>
-                        <input type="number" id="carga-valor" class="form-control" placeholder="Valor" required>
-                        <button type="submit" class="btn btn-primary">Transmitir</button>
+                        <input type="number" id="carga-valor" class="form-control" placeholder="Valor R$" required>
+                        <button type="submit" class="btn btn-primary" style="width: 100%;">Postar</button>
                     </form>
                 </div>
             </section>
@@ -154,9 +147,30 @@
         </main>
     </div>
 
+    <div id="modal-chat" class="modal-overlay hidden">
+        <div class="modal-content" style="border-color: #10b981; padding: 20px;">
+            <div id="chat-view-list">
+                <div id="lista-de-contatos-chat" style="max-height: 300px; overflow-y: auto;"></div>
+            </div>
+
+            <div id="chat-view-messages" class="hidden">
+                <h3 id="chat-titulo" style="color: #10b981; margin-top: 0;"></h3>
+                <div class="chat-box" id="chat-box" style="height: 250px;"></div>
+
+                <form onsubmit="app.enviarMensagem(event)" style="display: flex; gap: 10px;">
+                    <input type="text" id="chat-input" class="form-control" placeholder="Mensagem..." style="margin-bottom: 0; flex: 1;" required autocomplete="off">
+                    <button type="submit" class="btn btn-success" style="padding: 10px 20px;">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+                    </button>
+                </form>
+            </div>
+            
+            <button class="btn btn-outline" onclick="app.fecharChat()" style="width: 100%; margin-top: 15px; color: #a0a0a0; border-color: #333;">Fechar Chat</button>
+        </div>
+    </div>
+
     <div class="chat-fab" onclick="app.abrirListaChats()"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v10z"></path></svg><span id="chat-badge" class="chat-badge hidden">!</span></div>
     <div id="modal-rastreio" class="modal-overlay hidden"><div class="modal-content"><div id="rastreio-info"></div><button class="btn btn-primary" onclick="app.fecharRastreio()">Fechar</button></div></div>
-    <div id="modal-chat" class="modal-overlay hidden"><div class="modal-content"><div id="chat-box" style="height:250px; overflow-y:auto; margin-bottom:10px;"></div><form onsubmit="app.enviarMensagem(event)"><input type="text" id="chat-input" class="form-control"></form><button onclick="app.fecharChat()">Fechar</button></div></div>
     <div id="toast-container"></div>
 
     <script src="js/dashboard.js"></script>

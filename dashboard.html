@@ -23,8 +23,6 @@
         .brand span { color: var(--bf-orange); }
 
         .icon-btn { background: rgba(255,255,255,0.05); border: 1px solid var(--border-color); color: var(--text-muted); cursor: pointer; transition: all 0.3s ease; display: flex; align-items: center; justify-content: center; padding: 8px; border-radius: 8px; }
-        .icon-btn:hover { color: var(--text-main); background: rgba(255, 255, 255, 0.1); border-color: var(--text-muted); }
-
         .btn-hamburger { display: none; }
 
         .profile-trigger { display: flex; align-items: center; gap: 10px; cursor: pointer; padding: 5px 10px; border-radius: 30px; border: 1px solid transparent; transition: all 0.3s; }
@@ -35,7 +33,7 @@
         .app-wrapper { display: flex; flex: 1; overflow: hidden; position: relative; }
         .sidebar { width: 260px; background-color: var(--surface-dark); border-right: 1px solid var(--border-color); display: flex; flex-direction: column; padding: 20px 0; gap: 5px; z-index: 150; }
 
-        .nav-btn { background: transparent; color: var(--text-muted); border: none; padding: 15px 30px; text-align: left; font-size: 15px; font-weight: 600; cursor: pointer; transition: all 0.3s; border-left: 4px solid transparent; width: 100%; }
+        .nav-btn { background: transparent; color: var(--text-muted); border: none; padding: 15px 30px; text-align: left; font-size: 15px; font-weight: 600; cursor: pointer; transition: all 0.3s; border-left: 4px solid transparent; width: 100%; display: flex; align-items: center; gap: 10px; }
         .nav-btn:hover { background-color: var(--surface-lighter); color: var(--text-main); border-left-color: var(--bf-blue-light); }
         .nav-btn.active-nav { background: linear-gradient(90deg, rgba(0,61,124,0.3) 0%, transparent 100%); color: var(--bf-orange); border-left-color: var(--bf-orange); }
         
@@ -47,20 +45,14 @@
         .section-title { font-size: 28px; margin-top: 0; margin-bottom: 25px; font-weight: 300; border-bottom: 1px solid var(--border-color); padding-bottom: 15px; }
         .card { background-color: var(--surface-dark); border: 1px solid var(--border-color); border-radius: 12px; padding: 25px; margin-bottom: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
 
-        .form-group { margin-bottom: 20px; }
-        .form-group label { display: block; margin-bottom: 8px; color: var(--text-muted); font-size: 14px; text-transform: uppercase; letter-spacing: 0.5px; }
-        .form-control { width: 100%; padding: 12px 15px; border: 1px solid var(--border-color); border-radius: 8px; background-color: var(--bg-dark); color: var(--text-main); font-size: 16px; box-sizing: border-box; transition: 0.3s; font-family: 'Inter', sans-serif; }
-        
-        .btn { padding: 12px 24px; border: none; border-radius: 8px; cursor: pointer; font-weight: 600; font-size: 15px; transition: all 0.3s; display: inline-flex; align-items: center; justify-content: center; gap: 8px; }
+        .form-control { width: 100%; padding: 12px 15px; border: 1px solid var(--border-color); border-radius: 8px; background-color: var(--bg-dark); color: var(--text-main); font-size: 16px; box-sizing: border-box; margin-bottom: 15px; }
+        .btn { padding: 12px 24px; border: none; border-radius: 8px; cursor: pointer; font-weight: 600; display: inline-flex; align-items: center; justify-content: center; gap: 8px; }
         .btn-primary { background-color: var(--bf-blue); color: white; }
-        .btn-success { background-color: #10b981; color: white; }
         .btn-danger { background-color: transparent; color: #ef4444; border: 1px solid #ef4444; margin: 20px; text-align: center; }
 
-        .modal-overlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0, 0, 0, 0.8); backdrop-filter: blur(5px); display: flex; justify-content: center; align-items: center; z-index: 999; }
-        .modal-overlay.hidden { display: none; }
-        .modal-content { background: var(--surface-dark); width: 90%; max-width: 450px; padding: 30px; border-radius: 12px; border: 1px solid var(--border-color); box-shadow: 0 0 30px rgba(0,0,0,0.8); position: relative; }
-        
-        .chat-fab { position: fixed; bottom: 30px; right: 30px; width: 65px; height: 65px; background: #10b981; border-radius: 50%; display: flex; justify-content: center; align-items: center; z-index: 900; cursor: pointer; }
+        .chat-fab { position: fixed; bottom: 30px; right: 30px; width: 65px; height: 65px; background: #10b981; border-radius: 50%; display: flex; justify-content: center; align-items: center; cursor: pointer; z-index: 900; }
+        .modal-overlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0, 0, 0, 0.8); display: flex; justify-content: center; align-items: center; z-index: 999; }
+        .modal-content { background: var(--surface-dark); width: 90%; max-width: 450px; padding: 30px; border-radius: 12px; border: 1px solid var(--border-color); }
         #toast-container { position: fixed; top: 20px; right: 20px; z-index: 9999; display: flex; flex-direction: column; gap: 10px; }
 
         .mobile-overlay { display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.6); z-index: 140; backdrop-filter: blur(2px); transition: opacity 0.3s; opacity: 0; }
@@ -71,10 +63,8 @@
             .topbar { padding: 0 15px; } 
             .topbar-center .brand { font-size: 18px; } 
             .user-info-header { display: none; } 
-            
-            /* Esconde o botão sair do topo no celular */
+            /* MÁGICA: Esconde o botão sair do topo no celular */
             .header-logout-btn { display: none !important; }
-
             .sidebar { position: fixed; left: -260px; top: 0; height: 100vh; transition: transform 0.3s ease; box-shadow: 5px 0 20px rgba(0,0,0,0.8); padding-top: 80px; }
             .sidebar.active { transform: translateX(260px); } 
             .content-area { padding: 20px; } 
@@ -107,21 +97,30 @@
         <div id="mobile-overlay" class="mobile-overlay" onclick="app.closeSidebar()"></div>
 
         <aside class="sidebar" id="app-sidebar">
-            <div style="padding: 10px 20px; color: var(--text-muted); font-size: 12px; letter-spacing: 1px;">MENU</div>
+            <div style="padding: 10px 20px; color: var(--text-muted); font-size: 12px;">MENU</div>
             <button class="nav-btn" data-target="perfil" onclick="app.navigate('perfil')">⚙️ Meu Perfil</button>
             <button class="nav-btn embarcador-only hidden" data-target="minhas-cargas" onclick="app.navigate('minhas-cargas')">📦 Gestão de Cargas</button>
             <button class="nav-btn embarcador-only hidden" data-target="postar-carga" onclick="app.navigate('postar-carga')" style="color:var(--bf-orange)">+ Nova Carga</button>
             <button class="nav-btn motorista-only hidden" data-target="gestao-cargas" onclick="app.navigate('gestao-cargas')">🔍 Procurar Fretes</button>
+            <button class="nav-btn motorista-only hidden" data-target="minhas-viagens" onclick="app.navigate('minhas-viagens')">🛣️ Minhas Viagens</button>
             
-            <button class="nav-btn" onclick="app.logout()" style="color: #ef4444; margin-top: 20px; border-top: 1px solid #333;">
-                ❌ Sair do Sistema
+            <button class="nav-btn" onclick="app.logout()" style="color: #ef4444; border-top: 1px solid #333; margin-top: 10px;">
+                ❌ SAIR DO SISTEMA
             </button>
         </aside>
 
         <main class="content-area">
             <section id="view-perfil" class="view-section">
                 <h2 class="section-title">Meu Perfil</h2>
-                <div class="card" id="perfil-card">Carregando dados...</div>
+                <div class="card">
+                    <div id="perfil-card">Carregando dados...</div>
+                    <form id="form-perfil" class="hidden">
+                        <input type="text" id="perfil-nome" class="form-control" readonly>
+                        <input type="email" id="perfil-email" class="form-control" readonly>
+                        <input type="text" id="perfil-telefone" class="form-control" readonly>
+                        <button type="button" class="btn btn-primary" onclick="app.toggleEditPerfil()">Editar</button>
+                    </form>
+                </div>
             </section>
 
             <section id="view-minhas-cargas" class="view-section active">
@@ -136,20 +135,21 @@
                         <input type="text" id="carga-origem" class="form-control" placeholder="Origem" required>
                         <input type="text" id="carga-destino" class="form-control" placeholder="Destino" required>
                         <input type="number" id="carga-valor" class="form-control" placeholder="Valor R$" required>
+                        <textarea id="carga-descricao" class="form-control" placeholder="Detalhes"></textarea>
                         <button type="submit" class="btn btn-primary" style="width: 100%;">Postar</button>
                     </form>
                 </div>
             </section>
-            
+
             <section id="view-gestao-cargas" class="view-section"><div id="lista-cargas-disponiveis"></div></section>
             <section id="view-minhas-viagens" class="view-section"><div id="lista-minhas-viagens"></div></section>
             <section id="view-historico-viagens" class="view-section"><div id="lista-historico-viagens"></div></section>
         </main>
     </div>
 
-    <div class="chat-fab" onclick="app.abrirListaChats()"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v10z"></path></svg></div>
+    <div class="chat-fab" onclick="app.abrirListaChats()"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v10z"></path></svg><span id="chat-badge" class="chat-badge hidden">!</span></div>
     <div id="modal-rastreio" class="modal-overlay hidden"><div class="modal-content"><div id="rastreio-info"></div><button class="btn btn-primary" onclick="app.fecharRastreio()">Fechar</button></div></div>
-    <div id="modal-chat" class="modal-overlay hidden"><div class="modal-content"><div id="chat-box"></div><button onclick="app.fecharChat()">Fechar</button></div></div>
+    <div id="modal-chat" class="modal-overlay hidden"><div class="modal-content"><div id="chat-box" style="height:200px; overflow-y:auto;"></div><form onsubmit="app.enviarMensagem(event)"><input type="text" id="chat-input" class="form-control"></form><button onclick="app.fecharChat()">Fechar</button></div></div>
     <div id="toast-container"></div>
 
     <script src="js/dashboard.js"></script>
